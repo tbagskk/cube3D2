@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouaza <mbouaza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcherqui <gcherqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:30:39 by mbouaza           #+#    #+#             */
-/*   Updated: 2023/05/18 02:28:16 by mbouaza          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:46:33 by gcherqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int32_t main(int argc, char **argv)
 		mlx_terminate(cube->mlx);
 		exit(EXIT_SUCCESS);
 	}
+	free(size);
 	
 }

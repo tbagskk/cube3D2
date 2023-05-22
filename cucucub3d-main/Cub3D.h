@@ -64,8 +64,11 @@ typedef struct	s_size  //rajout
 	int	*tab_x;
 	int	*tab_y;
 	char **map;
-	int	kk;
+	int	cmp;
+	int	k;
 	int l;
+	int	i;
+	int	j;
 }		t_size;
 
 typedef struct	s_coordinate //rajout
@@ -166,15 +169,17 @@ int deep_algo(t_cube *cube, t_size *size, t_coordinate *coordinate);
 char **replace2(char **map);
 void	vrf_map(int *j, int *k, int *i, t_size *size, int nb);
 char	**ft_strrdup(char **s1);
-char	**init_deep_algo(t_size *size, t_cube *cube, t_coordinate *coordinate);
+void	init_deep_algo(t_size *size, t_cube *cube, t_coordinate *coordinate);
 void	search_begin(char **map, t_coordinate *coordinate);
 char **replace(char **map, t_size *size);
 void find_map_dimensions(char **map, t_size *size);
 char **contour(char **map, t_size *size);
 void	init_deep_algo2(t_coordinate *coordinate, int *i, int *j, t_size *size);
 int	ft_strrlen(char **str);
-void	contour2(int i, int j, char ***new_map, t_size *size);
-
+void	contour2(char ***new_map, t_size *size);
+void	contour3(char ***new_map, t_size *size, char **map);
+void	freel(char **str, int n);
+void contour_all(char **new_map,t_size *size, char **map);
 
 
 #endif

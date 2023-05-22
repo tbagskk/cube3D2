@@ -1,7 +1,6 @@
 #include "../Cub3D.h"
 
 
-
 void jsp(char **map)
 {
     
@@ -135,6 +134,8 @@ void find_map_dimensions(char **map, t_size *size)
 void	init_contour(char ***new_map, t_size *size)
 {
 	int	i;
+	size->height+=2;
+	size->width+=1;
 
 	i = 0;
 	*new_map = malloc(sizeof (char *) * (size->height + 1));
@@ -143,55 +144,30 @@ void	init_contour(char ***new_map, t_size *size)
 		(*new_map)[i] = malloc(sizeof(char) * (size->width + 1));
 		i++;
 	}
+	size->k = 0;
+	size->l = 0;
+	
 }
 
 char **contour(char **map, t_size *size)
 {
 	int	i;
 	int	j;
-	int l;
-	int k;
-
 	char **new_map;
 	char symbole = '#';
 	
-	size->height+=2;
-	size->width+=1;
-	i = 0;
-	l = 0;
-	k = 0;
-	
-
+	size->i = 0;
 	init_contour(&new_map, size);
-//	
-	while (i < size->height)
+	while (size->i < size->height)
 	{
-		j = 0;
-		l = 0;
-		while (j < size->width)
-		{
-			if (i == 0 || i == size->height - 1 || j == 0 || j == size->width - 1)
-				contour2(i, j, &new_map, size);
-			else
-			{
-				if (k < size->height - 2 && l < size->width - 1)
-				{
-					new_map[i][j] = map[k][l];
-					l++;
-				}
-				else
-					new_map[i][j] = ' ';
-			}
-			j++;
-		}
-		new_map[i][size->width] = '\0'; 
-		if (i > 0)
-		{
-			k++;
-			//size->k++;
-		}
-			//k++;
-		i++;
+		size->j = 0;
+		size->l = 0;
+		while (size->j < size->width)
+			contour_all(new_map, size, map);
+		new_map[size->i][size->width] = '\0'; 
+		if (size->i > 0)
+			size->k++;
+		size->i++;
 	}
 	new_map[size->height] = NULL;
 	return (new_map);	
@@ -204,7 +180,7 @@ char **replace(char **map, t_size *size)
 
 	i = 0;
 	j = 0;
-	while (i < size->height) // quand on met -1 ca segfault plus pour les grand tab
+	while (i < size->height - 1) // quand on met -1 ca segfault plus pour les grand tab
 	{
 		j = 0;
 		while(j < size->width - 1)
@@ -260,7 +236,21 @@ int	search_g(char **map)
 	return (1);
 }
 
+void free_all_size(t_size *size)
+{
+	free(size->tab_x);
+	free(size->tab_y);
+	freel(size->map, size->height);
+}
 
+int	max_nb(t_size *size)
+{
+	int	max;
+
+	max = (size->height * size->height * size->height);
+	//max = max * max;
+	return (max);
+}
 
 int deep_algo(t_cube *cube, t_size *size, t_coordinate *coordinate)
 {
@@ -269,16 +259,16 @@ int deep_algo(t_cube *cube, t_size *size, t_coordinate *coordinate)
     int k;
 	int dd;
 	
-	
     k = 1;
 	i = 0;
 	j = 0;
 	dd = 0;
 	init_deep_algo(size, cube, coordinate);
 	init_deep_algo2(coordinate, &i, &j, size);
-    while (dd < 20000)
+	size->cmp = max_nb(size);
+    while (size->cmp--)
     {
-		if (size->map[i][j + 1] == '0' )
+		if (size->map[i][j + 1] == '0')
 			vrf_map(&j, &k, &i, size, 1);
 		else if (size->map[i][j - 1] == '0')
 			vrf_map(&j, &k, &i,size, 1);
@@ -292,12 +282,11 @@ int deep_algo(t_cube *cube, t_size *size, t_coordinate *coordinate)
 			break;
 		size->tab_x[k] = i;
 		size->tab_y[k] = j;
-		dd++;
     }
-	
     jsp(size->map);
-	printf("%d\n", dd);
+	printf("%d\n", size->cmp);
 	if (search_g(size->map) == -1)
 		printf("la map n'est pas ferme\n");
+	free_all_size(size);
 	return (0);
 }
