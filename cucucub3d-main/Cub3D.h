@@ -165,21 +165,27 @@ int		fat(char *str);
 // gabin function
 
 void jsp(char **map);
-int deep_algo(t_cube *cube, t_size *size, t_coordinate *coordinate);
+int	deep_algo(t_cube *cube, t_size *size, t_coordinate *coordinate, int nb);
 char **replace2(char **map);
 void	vrf_map(int *j, int *k, int *i, t_size *size, int nb);
 char	**ft_strrdup(char **s1);
-void	init_deep_algo(t_size *size, t_cube *cube, t_coordinate *coordinate);
+void	init_deep_algo(t_size *size, t_cube *cube, t_coordinate *coordinate, int nb);
 void	search_begin(char **map, t_coordinate *coordinate);
 char **replace(char **map, t_size *size);
 void find_map_dimensions(char **map, t_size *size);
 char **contour(char **map, t_size *size);
 void	init_deep_algo2(t_coordinate *coordinate, int *i, int *j, t_size *size);
-int	ft_strrlen(char **str);
+int		ft_strrlen(char **str);
 void	contour2(char ***new_map, t_size *size);
 void	contour3(char ***new_map, t_size *size, char **map);
 void	freel(char **str, int n);
-void contour_all(char **new_map,t_size *size, char **map);
+void	contour_all(char **new_map,t_size *size, char **map);
+void	deep_algo2(int *i, int *j, int *k, t_size *size);
+void	init_deep(int *k, int *i, int *j);
+void	continue_deep(t_size *size, t_cube *cube, t_coordinate *coordinate);
+void	delete_n(t_size *size);
+void	free_all_size(t_size *size);
+int		search_g(char **map);
 
 
 #endif

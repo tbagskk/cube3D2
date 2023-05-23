@@ -6,7 +6,7 @@
 /*   By: gcherqui <gcherqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:30:39 by mbouaza           #+#    #+#             */
-/*   Updated: 2023/05/22 17:46:33 by gcherqui         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:26:14 by gcherqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int32_t main(int argc, char **argv)
 	t_size *size; // rajout
 	coordinate = malloc(sizeof(t_coordinate)); // rajout
 	size = malloc(sizeof(t_size)); // rajout
-	if (deep_algo(cube, size, coordinate)) //rajout
+	if (deep_algo(cube, size, coordinate, 0)) //rajout
 	{
 		cube->mlx = mlx_init(windowWidth, windowHeight, "Cub3D", true);
 		init_character(cube);
@@ -66,7 +66,9 @@ int32_t main(int argc, char **argv)
 		free_all_true(cube);
 		mlx_terminate(cube->mlx);
 		exit(EXIT_SUCCESS);
+		
 	}
+	free_all_size(size);
 	free(size);
 	
 }
