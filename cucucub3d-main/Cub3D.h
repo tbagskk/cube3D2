@@ -162,6 +162,8 @@ int		fat(char *str);
 
 // utils/utils_move.c //
 
+
+
 // gabin function
 
 void jsp(char **map);
@@ -186,6 +188,8 @@ void	continue_deep(t_size *size, t_cube *cube, t_coordinate *coordinate);
 void	delete_n(t_size *size);
 void	free_all_size(t_size *size);
 int		search_g(char **map);
+
+//char	**ft_strrdup(char **s1);
 
 
 #endif

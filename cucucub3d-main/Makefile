@@ -16,7 +16,14 @@ SRCS =	main.c \
 		parsing/check2.c \
 		src/key_action.c \
 		parsing/gabin.c \
-		parsing/gabin2.c
+		parsing/verif_map/utils_map.c \
+		parsing/verif_map/verif_map.c \
+		parsing/verif_map/verif_map2.c \
+		parsing/verif_map/verif_map3.c \
+		parsing/verif_map/verif_map4.c  \
+		parsing/verif_map/verif_map5.c \
+		utils/copy_true_map.c
+
 
 OBJS = $(SRCS:.c=.o)
 
