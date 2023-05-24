@@ -190,22 +190,12 @@ char	**replace(char **map, t_size *size)
 	int	i;
 	int	j;
 	int max;
-	char *test;
-	int b = 0;
-	char *caca = "############";
 
 	i = 0;
-	printf("len -> %zu\n", ft_strlen(map[4]));
 	while (i < size->height ) /* quand on met -1 ca segfault plus pour les grand tab*/
 	{
 		j = 0;
 		max = ft_strlen(map[i]);
-		printf("max ->%d\n", max);
-		 if (max < size->width)
-		 {
-			//printf("le join -> %s\n", ft_strjoin(map[i], caca));
-			printf("caca\n");
-		 }
 		while (j < (max - 1))
 		{
 			if (!(map[i][j] && (map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'N')))
@@ -214,7 +204,6 @@ char	**replace(char **map, t_size *size)
 		}
 		i++;
 	}
-
 	return (map);
 }
 
@@ -290,7 +279,6 @@ int	deep_algo(t_cube *cube, t_size *size, t_coordinate *coordinate, int nb)
 		if (k < 0)
 			break ;
 		size->tab_x[k] = i;
-		//printf("k -> %d\n", k);
 		size->tab_y[k] = j;
 	}
 	continue_deep(size, cube, coordinate);

@@ -62,9 +62,9 @@ void	init_deep_algo(t_size *size, t_cube *cube, t_coordinate *coordinate, int nb
 		size->tab_x = malloc(sizeof(int) * (pow(size->height, 3)));
 		size->tab_y = malloc(sizeof(int) * (pow(size->width, 3)));
 		replace(mapp, size);
-		//mapp2 = contour(mapp, size);
-		size->map = ft_strrdup(mapp);
-		//freel(mapp2, size->height);
+		mapp2 = contour(mapp, size);
+		size->map = ft_strrdup(mapp2);
+		freel(mapp2, size->height);
 		freel(mapp, (size->height - 2));
 	}
 }
@@ -135,7 +135,6 @@ void	init_deep(int *k, int *i, int *j)
 
 void	deep_algo2(int *i, int *j, int *k, t_size *size)
 {
-	//printf("i -> %d\n", *i);
 	if (size->map[*i][*j + 1] == '0')
 		vrf_map(j, k, i, size, 1);
 	else if (size->map[*i][*j - 1] == '0')
@@ -161,11 +160,25 @@ void	delete_n(t_size *size)
 		{
 			if (size->map[i][j] == 'N')
 			{
-				size->map[i][j] = '1';
+				if (size->map[i][j + 1] == '#' || size->map[i][j - 1] == '#' || size->map[i - 1][j] == '#' || size->map[i + 1][j] == '#' )
+					size->map[i][j] = 'G';
+				else
+					size->map[i][j] = '1';
 			}
 			j++;
 		}
 		i++;
+	}
+}
+
+void	continue_deep2(t_cube *cube, t_size *size, t_coordinate *coordinate, int zero)
+{
+	if (zero == 1)
+		deep_algo(cube, size, coordinate, 1);
+	else 
+	{
+		if (search_g(size->map) == -1)
+			printf("ERROR -> MAP OUVERTE\n");
 	}
 }
 
@@ -193,18 +206,6 @@ void	continue_deep(t_size *size, t_cube *cube, t_coordinate *coordinate)
 		}
 		i++;
 	}
-	if (zero == 1)
-		deep_algo(cube, size, coordinate, 1);
-
-	else 
-	{
-		if (search_g(size->map) == -1)
-			printf("ERROR -> MAP OUVERTE\n");
-	}
-	jsp(size->map);
-	printf("\n");
-		
-
-	
+	continue_deep2(cube, size, coordinate, zero);
 }
 
